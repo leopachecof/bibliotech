@@ -5,8 +5,11 @@ import googleIcon from "../../assets/icons/google-white.svg";
 import { useForm } from "react-hook-form";
 import { cadastrarEmailSenha, loginGoogle, loginfacebook } from "../../firebase/auth";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import FacebookIcon from "../../assets/icons/41282b58cf85ddaf5d28df96ed91de98.png";
+
 
 export function Cadastro() {
   const {
@@ -16,6 +19,12 @@ export function Cadastro() {
   } = useForm();
 
   const navigate = useNavigate();
+  const usuarioLogado = useContext(AuthContext);
+
+  // condicional para redirecionar o usuário para home caso esteja logado
+  if (usuarioLogado !== null) {
+    return <Navigate to="/" />;
+  }
 
   function onSubmit(data) {
     const { email, senha } = data;
@@ -71,6 +80,8 @@ export function Cadastro() {
 
 
   }
+
+ 
 
   return (
     <Container fluid className="my-5">
