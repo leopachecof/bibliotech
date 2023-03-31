@@ -44,7 +44,7 @@ export function App() {
               <Route path="/livros/adicionar" element={<AdicionarLivro />} />
               <Route path="/livros/editar/:id" element={<EditarLivro />} />
 
-              <Route path="/livros/editar/:id" element={<EditarLivro />} />
+              <Route path="/livros/detalhes/:id" element={<DetalhesLivro />} />
               
               <Route path="/emprestimos" element={<Emprestimos />} />
               <Route path="/emprestimos/adicionar" element={<AdicionarEmprestimo />} />
@@ -58,4 +58,7 @@ export function App() {
       <Toaster />
     </>
   );
+
 }
+
+

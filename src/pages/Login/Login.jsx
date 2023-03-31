@@ -4,9 +4,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/icons/google-white.svg";
+import FacebookIcon from "../../assets/icons/41282b58cf85ddaf5d28df96ed91de98.png";
 import loginImg from "../../assets/images/login.png";
 import { AuthContext } from "../../contexts/AuthContext";
-import { loginGoogle, loginEmailSenha } from "../../firebase/auth";
+import { loginGoogle, loginEmailSenha, loginfacebook } from "../../firebase/auth";
+
+
 
 export function Login() {
   const {
@@ -17,8 +20,9 @@ export function Login() {
 
   const navigate = useNavigate();
 
+
   function onSubmit(data) {
-    const { email, senha } = data;
+    const {email, senha } = data;
     loginEmailSenha(email, senha)
       .then((user) => {
         toast.success(`Entrando como ${user.email}`, {
@@ -38,7 +42,7 @@ export function Login() {
   function onLoginGoogle() {
     loginGoogle()
       .then((user) => {
-        toast.success(`Bem-vindo(a) ${user.email}`, {
+        toast.success(`Bem-vindo(a) ${user.displayName}`, {
           position: "bottom-right",
           duration: 2500,
         });
@@ -50,6 +54,27 @@ export function Login() {
           duration: 2500,
         });
       });
+
+
+  }
+
+  function onLoginFacebook() {
+    loginfacebook()
+      .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.displayName}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+
+
   }
 
   const usuarioLogado = useContext(AuthContext);
@@ -73,6 +98,12 @@ export function Login() {
         <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
         Google
       </Button>
+
+      <Button className="mb-3 ms-3" variant="primary" onClick={onLoginFacebook}>
+        <img src={FacebookIcon} width="32" alt="Facebook icon" /> Entrar com o
+        Facebook
+      </Button>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
