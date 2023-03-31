@@ -9,7 +9,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 export function Menu() {
   const navigate = useNavigate();
   const usuarioLogado = useContext(AuthContext);
-  console.log(usuarioLogado);
 
   function userName() {
     let displayName = ""
@@ -52,7 +51,7 @@ export function Menu() {
             <Nav.Link as={Link} to="/emprestimos">
               Emprestimos
             </Nav.Link>
-            <Nav.Link as={Link} to="/emprestimos">
+            <Nav.Link as={Link} to="/">
               {userName()}
             </Nav.Link>
             <Nav.Link onClick={onLogout}>
