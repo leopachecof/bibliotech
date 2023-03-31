@@ -9,7 +9,6 @@ import {
 
 } from "firebase/auth";
 import { auth } from "./config";
-export let loginName = "";
 
 
 // Função assíncrona = que o resultado não é obtido de imediato
@@ -27,7 +26,6 @@ export async function loginGoogle() {
   // Configurar como o login do google vai funcionar
   const provider = new GoogleAuthProvider();
   const resultado = await signInWithPopup(auth, provider);
- loginName = resultado.user.displayName
   return resultado.user;
 }
 
@@ -35,7 +33,6 @@ export async function loginfacebook() {
   const provider = new FacebookAuthProvider();
   const auth = getAuth();
   const resultado = await signInWithPopup(auth, provider);
-  loginName = resultado.user.displayName
   return resultado.user;
 
 }
