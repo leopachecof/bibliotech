@@ -3,9 +3,14 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  getAuth,
   signOut,
+  FacebookAuthProvider,
+
 } from "firebase/auth";
 import { auth } from "./config";
+export let loginName = "";
+
 
 // Função assíncrona = que o resultado não é obtido de imediato
 // Haverá "espera"
@@ -14,8 +19,7 @@ export async function cadastrarEmailSenha(email, senha) {
   // um novo usuário utilizando email/senha
 
   // Aguardando o resultado do Firebase
-  const resultado = await createUserWithEmailAndPassword(auth, email, senha);
-
+  const resultado = await createUserWithEmailAndPassword(auth,email, senha);
   return resultado.user;
 }
 
@@ -23,8 +27,17 @@ export async function loginGoogle() {
   // Configurar como o login do google vai funcionar
   const provider = new GoogleAuthProvider();
   const resultado = await signInWithPopup(auth, provider);
-
+ loginName = resultado.user.displayName
   return resultado.user;
+}
+
+export async function loginfacebook() {
+  const provider = new FacebookAuthProvider();
+  const auth = getAuth();
+  const resultado = await signInWithPopup(auth, provider);
+  loginName = resultado.user.displayName
+  return resultado.user;
+
 }
 
 export async function loginEmailSenha(email, senha) {
