@@ -2,19 +2,36 @@ import "./Menu.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
-import {  loginName, logout } from "../../firebase/auth";
+import { logout } from "../../firebase/auth";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export function Menu() {
   const navigate = useNavigate();
+  const usuarioLogado = useContext(AuthContext);
+  console.log(usuarioLogado);
 
+  function userName() {
+    let displayName = ""
+    if (usuarioLogado.displayName === null) {
+      for (let i = 0; i < usuarioLogado.email.length; i++) {
+        if (usuarioLogado.email[i] === "@"){
+          break
+        }else{
+          displayName = displayName + usuarioLogado.email.charAt(i)
+          console.log(i)
+        }
+      }
+      return displayName
+    }else{
+      return usuarioLogado.displayName
+    }
+  }
   function onLogout() {
     logout().then(() => {
       navigate("/login");
     });
   }
-  
-
-
   return (
     <Navbar bg="success" variant="light" expand="lg">
       <Container fluid>
@@ -36,7 +53,7 @@ export function Menu() {
               Emprestimos
             </Nav.Link>
             <Nav.Link as={Link} to="/emprestimos">
-              {loginName}
+              {userName()}
             </Nav.Link>
             <Nav.Link onClick={onLogout}>
               <i className="bi bi-box-arrow-right"></i>
