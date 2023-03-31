@@ -2,7 +2,7 @@ import "./Menu.css";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../../firebase/auth";
+import {  loginName, logout } from "../../firebase/auth";
 
 export function Menu() {
   const navigate = useNavigate();
@@ -12,6 +12,8 @@ export function Menu() {
       navigate("/login");
     });
   }
+  
+
 
   return (
     <Navbar bg="success" variant="light" expand="lg">
@@ -32,6 +34,9 @@ export function Menu() {
             </Nav.Link>
             <Nav.Link as={Link} to="/emprestimos">
               Emprestimos
+            </Nav.Link>
+            <Nav.Link as={Link} to="/emprestimos">
+              {loginName}
             </Nav.Link>
             <Nav.Link onClick={onLogout}>
               <i className="bi bi-box-arrow-right"></i>
