@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
 import { deleteLivro, getLivros } from "../../firebase/livros";
-import "./Livros.css";
+
 
 export function Livros() {
 
