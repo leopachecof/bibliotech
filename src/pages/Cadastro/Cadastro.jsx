@@ -1,4 +1,4 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logoIcon from "../../assets/icons/livros.png";
 import googleIcon from "../../assets/icons/google-white.svg";
@@ -81,7 +81,7 @@ export function Cadastro() {
 
   }
 
- 
+
 
   return (
     <Container fluid className="my-5">
@@ -93,14 +93,24 @@ export function Cadastro() {
         Já tem conta? <Link to="/login">Entre</Link>
       </p>
       <hr />
-      <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
-        <img src={googleIcon} width="32" alt="Logo do google" />
-        Entrar com o Google
+      <OverlayTrigger
+          placement="bottom"
+          overlay={
+            <Tooltip>Clique aqui para entrar com o Google</Tooltip>}>
+            <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
+              <img src={googleIcon} width="32" alt="Logo do google" />
+              Entrar com o Google
+            </Button>
+      </OverlayTrigger>
+      <OverlayTrigger
+          placement="bottom"
+          overlay={
+            <Tooltip>Clique aqui para entrar com o Facebook</Tooltip>}>
+            <Button className="mb-3 ms-3" variant="primary" onClick={onLoginFacebook}>
+              <img src={FacebookIcon} width="32" alt="Facebook icon" /> Entrar com o
+              Facebook
       </Button>
-      <Button className="mb-3 ms-3" variant="primary" onClick={onLoginFacebook}>
-        <img src={FacebookIcon} width="32" alt="Facebook icon" /> Entrar com o
-        Facebook
-      </Button>
+      </OverlayTrigger>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -126,9 +136,14 @@ export function Cadastro() {
             {errors.senha?.message}
           </Form.Text>
         </Form.Group>
-        <Button type="submit" variant="success">
-          Cadastrar
-        </Button>
+        <OverlayTrigger
+          placement="right"
+          overlay={
+            <Tooltip>Clique aqui para cadastrar</Tooltip>}>
+            <Button type="submit" variant="success">
+              Cadastrar
+            </Button>
+        </OverlayTrigger>
       </Form>
     </Container>
   );

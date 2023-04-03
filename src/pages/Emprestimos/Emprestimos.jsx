@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Badge, Button, Container, Table } from "react-bootstrap";
+import { Badge, Button, Container, Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getEmprestimos } from "../../firebase/emprestimos";
 import { Loader } from "../../components/Loader/Loader";
@@ -19,7 +19,12 @@ export function Emprestimos() {
             <Container>
                 <div className="d-flex justify-content-between align-items-center">
                     <h1>Emprestimos</h1>
-                    <Button as={Link} to="/emprestimos/adicionar" variant="success">Adicionar emprestimo</Button>
+                    <OverlayTrigger
+                        placement="bottom"
+                        overlay={
+                        <Tooltip>Clique aqui para adicionar empréstimo</Tooltip>}>
+                        <Button as={Link} to="/emprestimos/adicionar" variant="success">Adicionar emprestimo</Button>
+                    </OverlayTrigger>
                 </div>
                 <hr />
                 {
@@ -63,6 +68,10 @@ export function Emprestimos() {
                                 <td>{dataEmprestimo.toLocaleDateString("pt-br")}</td>
                                 <td>{dataEntrega.toLocaleDateString("pt-br")}</td>
                                 <td>
+                                <OverlayTrigger
+                                    placement="bottom"
+                                    overlay={
+                                    <Tooltip>Clique aqui para editar</Tooltip>}>
                                     <Button
                                             as={Link} 
                                             to={`/emprestimos/editar/${emprestimo.id}`}
@@ -71,6 +80,7 @@ export function Emprestimos() {
                                     >
                                             <i className="bi bi-pencil-fill"></i>
                                     </Button>
+                                </OverlayTrigger>
                                 </td>
                             </tr>
                         )
