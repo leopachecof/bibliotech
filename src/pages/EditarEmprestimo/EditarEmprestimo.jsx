@@ -19,12 +19,22 @@ export function EditarEmprestimo() {
     function onSubmit(data) {
         getLivro(data.idLivro).then(livro => {
             delete data.idLivro;
-            let editEmprestimo = {...data, livro};
+            let editEmprestimo = {...data, livro, dataEntrega: convertStringToDate(data.dataEntrega)};
             updateEmprestimo(id, editEmprestimo).then(() => {
                 toast.success("Empréstimo editado com sucesso!", { duration: 2000, position: "bottom-right" })
                 navigate("/emprestimos");
             })
         })
+    }
+
+    function convertStringToDate(dateString){
+        const dateArray = dateString.split("-");
+        const year = dateArray[0];
+        const month = parseInt(dateArray[1])-1;
+        const day = dateArray[2];
+        const date = new Date(year, month, day);
+        date.setHours("23", "59", "59");
+        return date;
     }
 
     useEffect(() => {
@@ -73,6 +83,13 @@ export function EditarEmprestimo() {
                             {errors.idLivro?.message}
                         </Form.Text>
                     </Form.Group>
+                    <Form.Group className="mb-3">
+                    <Form.Label>Data de entrega</Form.Label>
+                    <Form.Control type="date" className={errors.dataEntrega && "is-invalid"} {...register("dataEntrega", {required: "A data de entrega é obrigatória!"})}/>
+                    <Form.Text className="invalid-feedback">
+                        {errors.dataEntrega?.message}
+                    </Form.Text>
+                </Form.Group>
                     <Form.Group className="mb-3">
                         <Form.Label>Status</Form.Label>
                         <Form.Select className={errors.status && "is-invalid"} {...register("status", { required: "Status é obrigatório!" })}>
