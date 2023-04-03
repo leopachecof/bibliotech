@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
 import { deleteLivro, getLivros } from "../../firebase/livros";
-import "./Livros.css";
+
 
 export function Livros() {
 
@@ -58,7 +58,15 @@ export function Livros() {
                             {livros.map(livro => {
                                 return (
                                     <tr key={livro.id}>
-                                        <td>{livro.titulo}</td>
+                                        <td>
+                                            <Button
+                                                as={Link}
+                                                to={`/livros/detalhes/${livro.id}`}
+                                                variant="btn"
+                                                size="sm"
+                                                className="me-2">{livro.titulo}
+                                            </Button>
+                                        </td>
                                         <td>{livro.autor}</td>
                                         <td>{livro.categoria}</td>
                                         <td>{livro.isbn}</td>
