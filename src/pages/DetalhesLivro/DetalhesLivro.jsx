@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Form, Image } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { getLivro, updateLivro, uploadCapaLivro } from "../../firebase/livros";
+import { Button, Container } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { getLivro } from "../../firebase/livros";
 import Table from "react-bootstrap/Table";
 
 export function DetalhesLivro() {
@@ -22,8 +20,8 @@ export function DetalhesLivro() {
       <Container>
         <h1>Detalhes do livro</h1>
         <hr />
-        <Table className="table" striped bordered hover>
-          <thead>
+        <Table key={livro} className="table" striped bordered hover>
+          <thead >
             <tr>
               <th className="align-middle">Capa</th>
               <td><img src={livro?.urlCapa} alt="Minha Imagem" className="img-fluid" width="200" /></td>
