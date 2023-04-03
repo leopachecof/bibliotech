@@ -20,6 +20,15 @@ export function Emprestimos() {
     
     }
 
+    function queryEmprestimosPrev() {
+
+        getEmprestimos(lastVisible).then(result => {
+            setEmprestimos(result.emprestimos);
+            setLastVisible(result.firstDoc)
+        })
+        
+    }
+
     return (
         <div className="emprestimos">
             <Container>
@@ -75,7 +84,7 @@ export function Emprestimos() {
 
                             </Table>
                             <div className="d-flex justify-content-between">
-                            <Button onClick={queryEmprestimos}  variant="success">
+                            <Button onClick={queryEmprestimosPrev}  variant="success">
                             {"< "}prev
                             </Button>
                             <Button onClick={queryEmprestimos}  variant="success">

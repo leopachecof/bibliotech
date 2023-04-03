@@ -5,7 +5,7 @@ export async function adicionarEmprestimo(data) {
     await addDoc(emprestimosCollection, data);
 }
 
-export async function getEmprestimos(lastVisible) {
+export async function   getEmprestimos(lastVisible) {
     let q;
     if (lastVisible){
         q = query(emprestimosCollection,startAfter(lastVisible), limit(11))
@@ -16,11 +16,14 @@ export async function getEmprestimos(lastVisible) {
     const snapshot = await getDocs(q);
     const lastDoc = snapshot.docs[snapshot.docs.length - 1];
     let emprestimos = [];
+    const firstDoc = snapshot.docs[0] - lastDoc;;
     snapshot.forEach(doc => {
         emprestimos.push({ ...doc.data(), id: doc.id });
     });
-    return {emprestimos, lastDoc};
+    return {emprestimos, lastDoc,firstDoc};
 }
+
+
 export async function getEmprestimo(id) {
     const document = await getDoc(doc(emprestimosCollection, id));
     return { ...document.data(), id: document.id };
