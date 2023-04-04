@@ -5,12 +5,14 @@ import { getLivros } from "../../firebase/livros";
 import "./Home.css";
 
 export function Home() {
+
   const [emprestimos, setEmprestimos] = useState();
   const [livros, setLivros] = useState();
 
   useEffect(() => {
     getEmprestimos().then((busca) => {
-      setEmprestimos(busca);
+      setEmprestimos(busca.emprestimos);
+
     });
   }, []);
 
@@ -82,3 +84,4 @@ export function Home() {
     </div>
   );
 }
+

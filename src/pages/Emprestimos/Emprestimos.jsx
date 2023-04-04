@@ -1,18 +1,53 @@
 import { useEffect, useState } from "react";
 import { Badge, Button, Container, Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getEmprestimos } from "../../firebase/emprestimos";
+import { getEmprestimos, getEmprestimosNext, getEmprestimosPrevious } from "../../firebase/emprestimos";
 import { Loader } from "../../components/Loader/Loader";
 
 export function Emprestimos() {
 
     const [emprestimos, setEmprestimos] = useState(null);
-
+    const [lastVisible, setLastVisible] = useState(null);
+    const [firstVisible, setFirstVisible] = useState(null);
     useEffect(() => {
-        getEmprestimos().then(busca => {
-            setEmprestimos(busca);
-        })
+        queryEmprestimos()
+
+
     }, [])
+
+    function queryEmprestimos() {
+        getEmprestimos().then(result => {
+            setEmprestimos(result.emprestimos);
+            updatePagination(result.firstDoc, result.lastDoc);
+
+        })
+
+    }
+    function queryEmprestimosNext() {
+        getEmprestimosNext(lastVisible).then(result => {
+            setEmprestimos(result.emprestimos);
+            updatePagination(result.firstDoc, result.lastDoc);
+            
+
+        })
+
+    }
+
+    function queryEmprestimosPrev() {
+
+        getEmprestimosPrevious(firstVisible).then(result => {
+            setEmprestimos(result.emprestimos);
+            updatePagination(result.firstDoc, result.lastDoc);
+        })
+
+    }
+    function updatePagination(firstDoc, lastDoc) {
+
+        setFirstVisible(firstDoc ? firstDoc : firstVisible);
+        setLastVisible(lastDoc ? lastDoc : lastVisible);
+
+    }
+
 
     return (
         <div className="emprestimos">
@@ -31,6 +66,7 @@ export function Emprestimos() {
                     emprestimos === null ?
                         <Loader />
                         :
+
                         <Table striped bordered hover>
                             <thead>
                                 <tr>
@@ -87,7 +123,17 @@ export function Emprestimos() {
                     })}
                 </tbody>
                         </Table>
+
                 }
+                <div className="d-flex justify-content-between">
+                                <Button onClick={queryEmprestimosPrev} variant="success">
+                                    {"< "}prev
+                                </Button>
+                                <Button onClick={queryEmprestimosNext} variant="success">
+                                    next {">"}
+                                </Button>
+                            </div>
+
 
             </Container>
         </div>
