@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -109,6 +109,7 @@ export function Login() {
         Não tem conta? <Link to="/cadastro">Cadastre-se</Link>
       </p>
       <hr />
+
       <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
         <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
         Google
@@ -148,9 +149,14 @@ export function Login() {
             {errors.senha?.message}
           </Form.Text>
         </Form.Group>
-        <Button type="submit" variant="success">
-          Entrar
-        </Button>
+        <OverlayTrigger
+          placement="right"
+          overlay={
+            <Tooltip>Clique aqui para entrar</Tooltip>}>
+            <Button type="submit" variant="success">
+              Entrar
+            </Button>
+        </OverlayTrigger>
       </Form>
     </Container>
   );

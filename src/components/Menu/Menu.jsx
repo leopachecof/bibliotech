@@ -1,5 +1,5 @@
 import "./Menu.css";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import logoIcon from "./../../assets/icons/livros.png";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/auth";
@@ -54,9 +54,14 @@ export function Menu() {
             <Nav.Link as={Link} to="/">
               {userName()}
             </Nav.Link>
-            <Nav.Link onClick={onLogout}>
-              <i className="bi bi-box-arrow-right"></i>
-            </Nav.Link>
+            <OverlayTrigger
+              placement="bottom"
+              overlay={
+              <Tooltip>Clique aqui para sair</Tooltip>}>
+              <Nav.Link onClick={onLogout}>
+                <i className="bi bi-box-arrow-right"></i>
+              </Nav.Link>
+            </OverlayTrigger>
           </Nav>
         </Navbar.Collapse>
       </Container>

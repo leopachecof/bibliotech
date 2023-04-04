@@ -1,4 +1,4 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logoIcon from "../../assets/icons/livros.png";
 import googleIcon from "../../assets/icons/google-white.svg";
@@ -98,7 +98,7 @@ export function Cadastro() {
 
   }
 
- 
+
 
   return (
     <Container fluid className="my-5">
@@ -122,6 +122,7 @@ export function Cadastro() {
         <img src={GitHubIcon} width="32" alt="Github icon" /> Entrar com o
         GitHub
       </Button>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -147,9 +148,14 @@ export function Cadastro() {
             {errors.senha?.message}
           </Form.Text>
         </Form.Group>
-        <Button type="submit" variant="success">
-          Cadastrar
-        </Button>
+        <OverlayTrigger
+          placement="right"
+          overlay={
+            <Tooltip>Clique aqui para cadastrar</Tooltip>}>
+            <Button type="submit" variant="success">
+              Cadastrar
+            </Button>
+        </OverlayTrigger>
       </Form>
     </Container>
   );
