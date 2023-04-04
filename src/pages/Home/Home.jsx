@@ -12,6 +12,7 @@ export function Home() {
   useEffect(() => {
     getEmprestimos().then((busca) => {
       setEmprestimos(busca.emprestimos);
+
     });
   }, []);
 
