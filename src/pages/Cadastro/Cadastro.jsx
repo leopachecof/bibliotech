@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import logoIcon from "../../assets/icons/livros.png";
 import googleIcon from "../../assets/icons/google-white.svg";
 import { useForm } from "react-hook-form";
-import { cadastrarEmailSenha, loginGoogle, loginfacebook } from "../../firebase/auth";
+import { cadastrarEmailSenha, loginGitHub, loginGoogle, loginfacebook } from "../../firebase/auth";
 import { toast } from "react-hot-toast";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import FacebookIcon from "../../assets/icons/41282b58cf85ddaf5d28df96ed91de98.png";
+import FacebookIcon from "../../assets/icons/facebookIcon.png";
+import GitHubIcon from "../../assets/icons/githubicon.png";
+
 
 
 export function Cadastro() {
@@ -43,7 +45,22 @@ export function Cadastro() {
         });
       });
   }
-
+  function onLoginGitHub() {
+    loginGitHub()
+    .then((user) => {
+        toast.success(`Bem-vindo(a) ${user.displayName}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+        navigate("/");
+      })
+      .catch((erro) => {
+        toast.error(`Um erro aconteceu. Código: ${erro.code}`, {
+          position: "bottom-right",
+          duration: 2500,
+        });
+      });
+  }
   function onLoginGoogle() {
     // then = quando der certo o processo
     loginGoogle()
@@ -93,24 +110,19 @@ export function Cadastro() {
         Já tem conta? <Link to="/login">Entre</Link>
       </p>
       <hr />
-      <OverlayTrigger
-          placement="bottom"
-          overlay={
-            <Tooltip>Clique aqui para entrar com o Google</Tooltip>}>
-            <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
-              <img src={googleIcon} width="32" alt="Logo do google" />
-              Entrar com o Google
-            </Button>
-      </OverlayTrigger>
-      <OverlayTrigger
-          placement="bottom"
-          overlay={
-            <Tooltip>Clique aqui para entrar com o Facebook</Tooltip>}>
-            <Button className="mb-3 ms-3" variant="primary" onClick={onLoginFacebook}>
-              <img src={FacebookIcon} width="32" alt="Facebook icon" /> Entrar com o
-              Facebook
+      <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
+        <img src={googleIcon} width="32" alt="Logo do google" />
+        Entrar com o Google
       </Button>
-      </OverlayTrigger>
+      <Button className="mb-3 ms-3" variant="primary" onClick={onLoginFacebook}>
+        <img src={FacebookIcon} width="32" alt="Facebook icon" /> Entrar com o
+        Facebook
+      </Button>
+      <Button className="mb-3 ms-3" variant="secondary" onClick={onLoginGitHub}>
+        <img src={GitHubIcon} width="32" alt="Github icon" /> Entrar com o
+        GitHub
+      </Button>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
