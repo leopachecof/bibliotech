@@ -6,6 +6,7 @@ import {
   getAuth,
   signOut,
   FacebookAuthProvider,
+  GithubAuthProvider,
 
 } from "firebase/auth";
 import { auth } from "./config";
@@ -35,6 +36,13 @@ export async function loginfacebook() {
   const resultado = await signInWithPopup(auth, provider);
   return resultado.user;
 
+}
+
+export async function loginGitHub() {
+  const provider = new GithubAuthProvider();
+  const auth = getAuth();
+  const resultado = await signInWithPopup(auth, provider);
+  return resultado.user;
 }
 
 export async function loginEmailSenha(email, senha) {
