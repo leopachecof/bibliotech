@@ -8,7 +8,7 @@ export function AdicionarLivro() {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
-
+    
     function onSubmit(data) {
         const imagem = data.imagem[0];
         if (imagem) {
@@ -69,6 +69,15 @@ export function AdicionarLivro() {
                     <Form.Group className="mb-3">
                         <Form.Label>Imagem da capa</Form.Label>
                         <Form.Control type="file" accept=".png,.jpg,.jpeg,.gif" {...register("imagem")} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Check
+                            className="invisible"
+                            checked
+                            type="switch"
+                            id="custom-switch"
+                            label="livro ativo"
+                         {...register("boolean")} />
                     </Form.Group>
                     <Button type="submit" variant="success">Adicionar</Button>
                 </Form>

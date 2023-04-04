@@ -4,7 +4,9 @@ import {
     doc,
     getDoc,
     getDocs,
-    updateDoc
+    query,
+    updateDoc,
+    where
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { livrosCollection } from "./collections";
@@ -15,7 +17,8 @@ export async function addLivro(data) {
 }
 
 export async function getLivros() {
-    const snapshot = await getDocs(livrosCollection);
+    const q = query(livrosCollection, where("boolean", "==", true))
+    const snapshot = await getDocs(q);
     let livros = [];
     snapshot.forEach(doc => {
         livros.push({...doc.data(), id: doc.id});
@@ -24,16 +27,13 @@ export async function getLivros() {
 }
 
 export async function getLivro(id) {
-    const document = await getDoc(doc(livrosCollection, id));
+    const q = query(livrosCollection, where("boolean", "==", true))
+    const document = await getDoc(doc(q, id));
     return {...document.data(), id: document.id};
 }
 
 export async function updateLivro(id, data) {
     await updateDoc(doc(livrosCollection, id), data);
-}
-
-export async function deleteLivro(id) {
-    await deleteDoc(doc(livrosCollection, id));
 }
 
 export async function uploadCapaLivro(imagem) {

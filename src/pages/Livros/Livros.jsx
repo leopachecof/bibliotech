@@ -3,9 +3,7 @@ import { Button, Container, Table, OverlayTrigger, Tooltip } from "react-bootstr
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
-import { deleteLivro, getLivros } from "../../firebase/livros";
-
-
+import { deleteLivro, getLivros, updateLivro } from "../../firebase/livros";
 
 
 export function Livros() {
@@ -22,10 +20,11 @@ export function Livros() {
         })
     }
 
-    function onDeleteLivro(id, titulo) {
+    function onDeleteLivro(id, titulo, livro) {
         const deletar = window.confirm(`Tem certeza que deseja excluir o livro ${titulo}?`);
         if(deletar) {
-            deleteLivro(id).then(() => {
+            livro.boolean = false;
+            updateLivro(id, livro).then(() => {
                 toast.success(`${titulo} apagado com sucesso!`, {duration: 2000, position: "bottom-right"});
                 initializeTable();
             })
@@ -99,7 +98,7 @@ export function Livros() {
                                             placement="bottom"
                                             overlay={
                                             <Tooltip>Clique aqui para excluir</Tooltip>}>
-                                            <Button size="sm" variant="danger" onClick={() => onDeleteLivro(livro.id, livro.titulo)}>
+                                            <Button size="sm" variant="danger" onClick={() => onDeleteLivro(livro.id, livro.titulo, livro)}>
                                                 <i className="bi bi-trash3-fill"></i>
                                             </Button>
                                         </OverlayTrigger> 
