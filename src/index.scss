@@ -67,6 +67,10 @@ button.btn, .btn.btn-success {
 .bi.bi-pencil-fill {
         color: rgb(0, 0, 0);
 }
+//status pendente em Emprestimo
+.badge.bg-warning {
+    color: rgb(20, 20, 20);
+}
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&family=Poppins:wght@400;700&display=swap');
