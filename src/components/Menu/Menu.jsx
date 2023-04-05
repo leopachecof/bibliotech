@@ -51,6 +51,9 @@ export function Menu() {
             <Nav.Link as={Link} to="/emprestimos">
               Empréstimos
             </Nav.Link>
+            <Nav.Link as={Link} to="/autores">
+              Autores
+            </Nav.Link>
             <Nav.Link as={Link} to="/vendas">
               Vendas
             </Nav.Link>

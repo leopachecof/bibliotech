@@ -73,7 +73,7 @@ export function Livros() {
                                                 className="me-2">{livro.titulo}
                                             </Button>
                                         </td>
-                                        <td>{livro.autor}</td>
+                                        <td>{livro.autor.nome}</td>
                                         <td>{livro.categoria}</td>
                                         <td>{livro.isbn}</td>
                                         <td>
