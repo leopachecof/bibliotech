@@ -17,6 +17,8 @@ import { EditarEmprestimo } from "./pages/EditarEmprestimo/EditarEmprestimo";
 import { DetalhesLivro } from "./pages/DetalhesLivro/DetalhesLivro";
 import { Autores } from "./pages/Autores/Autores";
 import { AdicionarAutor } from "./pages/AdicionarAutor/AdicionarAutor";
+import { NotFound } from "./pages/NotFound/NotFound";
+import VendaLivros from "./pages/VendaLivro/VendaLivro";
 
 
 
@@ -57,6 +59,8 @@ export function App() {
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="*" element={<NotFound />}></Route>
+            <Route path="/vendas" element={<VendaLivros />} />
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
