@@ -1,0 +1,36 @@
+footer {
+  background-color: #589450c0;
+  padding: 10px 0;
+  margin-bottom: 0;
+}
+
+footer a {
+  color: #333;
+}
+
+footer a:hover {
+  color: #555;
+}
+
+footer .col-md-4 {
+  padding: 10px;
+}
+
+footer .text-center {
+  text-align: center;
+}
+
+footer .fa-facebook, .fa-twitter, .fa-instagram {
+  margin-right: 12px;
+}
+
+footer .fa-facebook:hover, .fa-twitter:hover, .fa-instagram:hover {
+  color: #555;
+}
+
+footer p {
+  padding-top: 5px;
+  font-size: 16px;
+  color: #292525;
+  margin-top: 10px;
+}
