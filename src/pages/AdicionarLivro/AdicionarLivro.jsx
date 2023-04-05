@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { addLivro, uploadCapaLivro } from "../../firebase/livros";
+import { getAutores, getAutor } from "../../firebase/autores";
+import { useEffect, useState } from "react";
 
 export function AdicionarLivro() {
-
+    const [autores, setAutores] = useState([]);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     
@@ -17,20 +19,35 @@ export function AdicionarLivro() {
                 toast.dismiss(toastId);
                 data.urlCapa = url;
                 delete data.imagem;
-                addLivro(data).then(() => {
+
+                getAutor(data.idAutor).then(autor => {
+                    delete data.idAutor;
+                    let novoLivro = {...data, autor}
+                addLivro(novoLivro).then(() => {
                     toast.success("Livro adicionado com sucesso!", { duration: 2000, position: "bottom-right" })
                     navigate("/livros");
                 })
             })
-        }
-        else {
+        })
+    }else {
             delete data.imagem;
-            addLivro(data).then(() => {
+            getAutor(data.idAutor).then(autor => {
+                delete data.idAutor;
+                let novoLivro = {...data, autor}
+            addLivro(novoLivro).then(() => {
                 toast.success("Livro adicionado com sucesso!", { duration: 2000, position: "bottom-right" })
                 navigate("/livros");
             })
-        }
+        })
     }
+    }
+
+    useEffect(() => {
+        getAutores().then(resultado => {
+            setAutores(resultado);
+            console.log(resultado)
+        });
+    }, [])
 
     return (
         <div className="adicionar-livro">
@@ -45,11 +62,13 @@ export function AdicionarLivro() {
                             {errors.titulo?.message}
                         </Form.Text>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3">
                         <Form.Label>Autor</Form.Label>
-                        <Form.Control type="text" className={errors.autor && "is-invalid"} {...register("autor", { required: "Autor é obrigatório!", maxLength: { value: 255, message: "Limite de 255 caracteres!" } })} />
-                        <Form.Text className="text-danger">
-                            {errors.autor?.message}
+                        <Form.Select  className={errors.idAutor && "is-invalid"} {...register("idAutor", {required: "Autor é obrigatório!"})}>
+                            {autores.map(autor => <option key={autor.id} value={autor.id}>{autor.nome}</option>)}
+                        </Form.Select>
+                        <Form.Text className="invalid-feedback">
+                            {errors.idAutor?.message}
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -77,7 +96,7 @@ export function AdicionarLivro() {
                             type="switch"
                             id="custom-switch"
                             label="livro ativo"
-                         {...register("boolean")} />
+                            {...register("boolean")} />
                     </Form.Group>
                     <Button type="submit" variant="success">Adicionar</Button>
                 </Form>
