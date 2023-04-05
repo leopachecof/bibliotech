@@ -12,8 +12,12 @@ $danger: rgb(244, 12, 12);
 
 ///////////////Menu
 .container-fluid img{
-    width: 80px;
+    width: 50px;
 }
+.btnLogin img{
+    width: 25px;
+}
+
 .ms-auto.navbar-nav {
     
     a.nav-link {
@@ -44,6 +48,7 @@ button.btn, .btn.btn-success {
     color: rgb(255, 255, 255);
     &:hover{
         background-color: rgb(132, 213, 191);
+        color:black;
     }
 }
 

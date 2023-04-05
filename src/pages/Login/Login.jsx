@@ -9,7 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import googleIcon from "../../assets/icons/google-white.svg";
+import googleIcon from "../../assets/icons/googleIcon.png";
 import FacebookIcon from "../../assets/icons/facebookIcon.png";
 import GitHubIcon from "../../assets/icons/githubicon.png";
 import loginImg from "../../assets/images/login.png";
@@ -121,28 +121,42 @@ export function Login() {
           Não tem conta? <Link to="/cadastro">Cadastre-se</Link>
         </p>
         <hr />
-
-        <Button className="mb-3" variant="danger" onClick={onLoginGoogle}>
-          <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
-          Google
-        </Button>
-
-        <Button
-          className="mb-3 ms-3"
-          variant="primary"
-          onClick={onLoginFacebook}
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>Clique aqui para entrar</Tooltip>}
         >
-          <img src={FacebookIcon} width="32" alt="Facebook icon" /> Entrar com o
-          Facebook
-        </Button>
+          <Button className="mb-3 btnLogin" variant="danger" onClick={onLoginGoogle} >
+            <img src={googleIcon} width="32" alt="Google icon" /> Entrar com o
+            Google
+          </Button>
+        </OverlayTrigger>
+        <OverlayTrigger
+          placement="bottom"
+          overlay={<Tooltip>Clique aqui para entrar</Tooltip>}
+        >
+          <Button
+            className="mb-3 ms-3 btnLogin"
+            variant="primary"
+            onClick={onLoginFacebook}
+          >
+            <img src={FacebookIcon} width="32" alt="Facebook icon" /> Entrar com o
+            Facebook
+          </Button>
+        </OverlayTrigger>
+        <OverlayTrigger
+            placement="bottom"
+            overlay={<Tooltip>Clique aqui para entrar</Tooltip>}
+          >
         <Button
-          className="mb-3 ms-3"
+          className="mb-3 ms-3 btnLogin"
           variant="secondary"
           onClick={onLoginGitHub}
         >
           <img src={GitHubIcon} width="32" alt="Github icon" /> Entrar com o
           GitHub
         </Button>
+        </OverlayTrigger>
+
 
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3" controlId="email">
@@ -167,7 +181,7 @@ export function Login() {
             />
             <button
               type="button"
-              class="btn btn-secondary btn-sm"
+              className="btn btn-secondary btn-sm"
               onClick={toggleMostrarSenha}
             >
               {mostrarSenha ? "Ocultar Senha" : "Mostrar Senha"}
