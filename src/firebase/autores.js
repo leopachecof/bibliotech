@@ -15,3 +15,8 @@ export async function getAutores() {
     })
     return autores;
 }
+
+export async function getAutor(id){
+    const document = await getDoc(doc(autoresCollection, id));
+    return {...document.data(), id: document.id}
+}
