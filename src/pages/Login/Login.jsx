@@ -119,7 +119,7 @@ export function Login() {
         <h4>Bem-vindo(a) de volta!</h4>
         <p className="text-muted">
           Não tem conta? <Link to="/cadastro">Cadastre-se</Link>
-        </p>
+        </p>  
         <hr />
         <OverlayTrigger
           placement="bottom"

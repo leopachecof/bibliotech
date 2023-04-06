@@ -57,7 +57,7 @@ export function Menu() {
             <Nav.Link as={Link} to="/vendas">
               Vendas
             </Nav.Link>
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/Perfil/Usuario">
               {userName()}
             </Nav.Link>
             <OverlayTrigger

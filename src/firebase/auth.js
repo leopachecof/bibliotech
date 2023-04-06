@@ -7,6 +7,9 @@ import {
   signOut,
   FacebookAuthProvider,
   GithubAuthProvider,
+  updateProfile,
+  updatePassword,
+  updateEmail,
 
 } from "firebase/auth";
 import { auth } from "./config";
@@ -19,7 +22,7 @@ export async function cadastrarEmailSenha(email, senha) {
   // um novo usuário utilizando email/senha
 
   // Aguardando o resultado do Firebase
-  const resultado = await createUserWithEmailAndPassword(auth,email, senha);
+  const resultado = await createUserWithEmailAndPassword(auth, email, senha);
   return resultado.user;
 }
 
@@ -56,3 +59,9 @@ export async function logout() {
   // Deslogar o usuário atual do firebase
   await signOut(auth);
 }
+export async function atualizarUsuario(displayName, email, senha) {
+  await updateEmail(auth.currentUser, email)
+  await updateProfile(auth.currentUser, { displayName })
+  await updatePassword(auth.currentUser, senha)
+}
+

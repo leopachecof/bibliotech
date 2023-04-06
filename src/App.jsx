@@ -19,6 +19,7 @@ import { Autores } from "./pages/Autores/Autores";
 import { AdicionarAutor } from "./pages/AdicionarAutor/AdicionarAutor";
 import { NotFound } from "./pages/NotFound/NotFound";
 import  VendaLivros  from "./pages/VendaLivro/VendaLivro";
+import { PerfilUsuario } from "./pages/PerfilUsuario/PerfilUsuario";
 
 
 
@@ -49,7 +50,7 @@ export function App() {
               <Route path="/livros" element={<Livros />} />
               <Route path="/livros/adicionar" element={<AdicionarLivro />} />
               <Route path="/livros/editar/:id" element={<EditarLivro />} />
-
+              <Route path="/perfil/usuario" element={<PerfilUsuario />} />
               <Route path="/livros/detalhes/:id" element={<DetalhesLivro />} />
               
               <Route path="/emprestimos" element={<Emprestimos />} />
