@@ -26,7 +26,7 @@ export async function getLivros() {
 }
 
 export async function getLivro(id) {
-    const q = query(livrosCollection, where("boolean", "==", true))
+    const q = query(livrosCollection)
     const document = await getDoc(doc(q, id));
     return {...document.data(), id: document.id};
 }
