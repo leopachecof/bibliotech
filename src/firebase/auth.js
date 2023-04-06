@@ -65,3 +65,9 @@ export async function atualizarUsuario(displayName, email, senha) {
   await updatePassword(auth.currentUser, senha)
 }
 
+export async function deletarCadastro(user) {
+  const cadastro = window.confirm ("Tem certeza que deseja excluir seu cadastro?");
+  if (cadastro) {
+    await user.delete();
+  }
+}
