@@ -32,7 +32,7 @@ export function DetalhesLivro() {
             </tr>
             <tr>
               <th className="align-middle">Autor</th>
-              <td>{livro?.autor}</td>
+              <td>{livro?.autor.nome}</td>
             </tr>
             <tr>
               <th className="align-middle">Categoria</th>
