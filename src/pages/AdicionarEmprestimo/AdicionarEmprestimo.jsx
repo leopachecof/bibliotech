@@ -14,11 +14,9 @@ export function AdicionarEmprestimo() {
     const navigate = useNavigate();
 
     function onSubmit(data) {
-        console.log(data)
         getLivro(data.idLivro).then((livro) => {
             delete data.idLivro;
             let novoEmprestimo = {...data, status: "Pendente", livro, dataEmprestimo: new Date(), dataEntrega: convertStringToDate(data.dataEntrega),};
-           console.log(novoEmprestimo)
             adicionarEmprestimo(novoEmprestimo).then(() => {
                 toast.success("Empréstimo adicionado com sucesso!", {duration: 2000, position: "bottom-right"});
                 navigate("/emprestimos");
