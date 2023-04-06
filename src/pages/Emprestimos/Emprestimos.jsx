@@ -70,8 +70,8 @@ export function Emprestimos() {
         <div className="emprestimos">
             <Container>
                 <div className="d-flex justify-content-between align-items-center">
-                    <h1>Emprestimos</h1>
-                    <Button as={Link} to="/emprestimos/adicionar" variant="success">Adicionar emprestimo</Button>
+                    <h1>Empréstimos</h1>
+                    <Button as={Link} to="/emprestimos/adicionar" variant="success">Adicionar empréstimo</Button>
                 </div>
                 <hr />
                 {

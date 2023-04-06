@@ -114,7 +114,7 @@ export function Cadastro() {
     <>
       <Container fluid className="my-5">
         <p className="text-center">
-          <img src={logoIcon} width="256" alt="Logo do app" />
+          <img src={logoIcon} width="256" alt="Logo do app"  style={{width:"256px" }} />
         </p>
         <h4>Faça parte da nossa plataforma</h4>
         <p className="text-muted">

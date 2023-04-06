@@ -18,10 +18,7 @@ import { DetalhesLivro } from "./pages/DetalhesLivro/DetalhesLivro";
 import { Autores } from "./pages/Autores/Autores";
 import { AdicionarAutor } from "./pages/AdicionarAutor/AdicionarAutor";
 import { NotFound } from "./pages/NotFound/NotFound";
-import  VendaLivros  from "./pages/VendaLivro/VendaLivro";
-import { PerfilUsuario } from "./pages/PerfilUsuario/PerfilUsuario";
-
-
+import VendaLivros from "./pages/VendaLivro/VendaLivro";
 
 
 export function App() {

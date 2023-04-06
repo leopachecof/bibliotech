@@ -114,7 +114,7 @@ export function Login() {
     <>
       <Container fluid className="my-5">
         <p className="text-center">
-          <img src={loginImg} width="256" alt="Logo" />
+          <img src={loginImg} alt="Logo" style={{width:"256px" }} />
         </p>
         <h4>Bem-vindo(a) de volta!</h4>
         <p className="text-muted">
