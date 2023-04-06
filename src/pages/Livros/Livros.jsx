@@ -3,7 +3,7 @@ import { Button, Container, Table, OverlayTrigger, Tooltip } from "react-bootstr
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
-import { deleteLivro, getLivros, updateLivro } from "../../firebase/livros";
+import { getLivros, updateLivro } from "../../firebase/livros";
 
 
 export function Livros() {

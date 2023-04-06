@@ -121,28 +121,39 @@ export function AdicionarLivro() {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Categoria</Form.Label>
-
-            <Form.Select
-              value={categoriaSelecionada}
-              onChange={(e) => setCategoriaSelecionada(e.target.value)}
-            >
-              <option value="">Selecione uma categoria</option>
-              {categorias.map((categoria) => (
-                <option key={categoria} value={categoria}>
-                  {categoria}
-                </option>
-              ))}
+            
+              <Form.Select
+                value={categoriaSelecionada}
+                onChange={(e) => setCategoriaSelecionada(e.target.value)}>
+              
+                <option value="">Selecione uma categoria</option>
+                {categorias.map((categoria) => (
+                  <option key={categoria} value={categoria}>
+                    {categoria}
+                  </option>
+                ))}
             </Form.Select>
+        </Form.Group>
+
+            <Button type="button" className="mb-3" variant="success" onClick={adicionarCategoria}>
+                Adicionar categoria
+            </Button>
+              
+        <Form.Group className="mb-3">
+            <Form.Control
+              type="text"
+              value={categoriasLivro.join(", ")}
+              className={errors.categoria && "is-invalid"}
+              {...register("categoria", {
+                required: "Categoria é obrigatória!",
+                maxLength: { value: 255, message: "Limite de 255 caracteres!" },
+              })}
+            />
+            <Form.Text className="text-danger">
+              {errors.categoria?.message}
+            </Form.Text>
           </Form.Group>
 
-          <Button
-            type="button"
-            className="mb-3"
-            variant="success"
-            onClick={adicionarCategoria}
-          >
-            Adicionar categoria
-          </Button>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>ISBN</Form.Label>
             <Form.Control
@@ -183,3 +194,4 @@ export function AdicionarLivro() {
     </div>
   );
 }
+  
